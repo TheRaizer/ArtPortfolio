@@ -24,6 +24,9 @@ const navItemVariants: Variants = {
   },
 };
 
+/**
+ * A item that exists within the NavBar
+ */
 export const NavItem = ({
   href,
   children,

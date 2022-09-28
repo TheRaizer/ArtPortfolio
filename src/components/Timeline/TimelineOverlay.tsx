@@ -22,6 +22,9 @@ const Styled = {
   `,
 };
 
+/**
+ * The entire timeline that will overlay on top of the page components.
+ */
 export const TimelineOverlay = (): ReactElement | null => {
   const { viewportState } = useRecoilValue(appConfigState);
   const Component = useMemo(
