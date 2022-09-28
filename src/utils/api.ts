@@ -6,7 +6,6 @@ import { Method } from '../../types/utils/api.type';
  * Fetch function for the front end to access the api correctly.
  * @param url - the url for the api
  * @param method - the type of method to assign to the request
- * @param authRequired - whether the user must be logged into firebase
  * @param body - the body of the request
  * @param options - other request options
  * @returns the data and response returned from the request
