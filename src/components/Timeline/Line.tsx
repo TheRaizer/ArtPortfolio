@@ -28,6 +28,9 @@ const StyledLine = styled(motion.div)<
   position: absolute;
 `;
 
+/**
+ * A timeline line that can expand vertically or horizontally.
+ */
 export const Line = ({
   expandVertically,
   transitionDuration,

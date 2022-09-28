@@ -7,7 +7,7 @@ import { visibilityStates } from '../constants/framerMotionStates';
 
 /**
  * The animation of a timeline component.
- * @param order the position of the timeline component in the overall timeline. 0 indexed.
+ * @param order: the position of the timeline component in the overall timeline. 0 indexed.
  * @returns
  * @see ref: a ref that should be passed to the timeline component that will be controlled.
  * @see control: a control that manages the animation of the timeline component.

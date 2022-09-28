@@ -26,6 +26,9 @@ const StyledCircle = styled(motion.div)<PositionProps & MarginProps>`
   position: absolute;
 `;
 
+/**
+ * A timeline circle that can expand vertically or horizontally.
+ */
 export const Circle = ({
   expandVertically,
   transitionDuration,

@@ -13,7 +13,7 @@ const getWindowDimensions = (): { width: number; height: number } => {
 
 /**
  * Executes a given function whenever a resize event is fired from the window.
- * @param handleResize function to execute when window is resized.
+ * @param handleResize: function to execute when window is resized.
  * @returns
  * @see windowDimensions: the current window dimensions.
  */

@@ -14,6 +14,10 @@ export type GalleryPieceProps = {
   src: string;
 };
 
+/**
+ * Component that displays a piece of art.
+ * @param src: the src for the piece of art
+ */
 export const GalleryPiece = ({ src }: GalleryPieceProps): ReactElement => {
   const [imageLoading, setImageLoading] = useState(true);
 
