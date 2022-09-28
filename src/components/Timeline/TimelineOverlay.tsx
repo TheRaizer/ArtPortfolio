@@ -74,7 +74,7 @@ export const TimelineOverlay = (): ReactElement | null => {
             <Line
               order={5}
               expandVertically={true}
-              height="80vh"
+              height="150vh"
               transitionDuration={1}
               top="70vh"
               left="5%"
@@ -83,7 +83,7 @@ export const TimelineOverlay = (): ReactElement | null => {
               order={6}
               expandVertically={true}
               transitionDuration={0.3}
-              top="149vh"
+              top="219vh"
               left="5%"
               marginleft="-11px"
             />

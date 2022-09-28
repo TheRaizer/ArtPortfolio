@@ -14,6 +14,9 @@ export const Styled = {
   `,
   HeaderContainer: styled(Col)`
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
     top: 37%;
     left: ${({ theme }) =>
@@ -67,6 +70,7 @@ export const HomeSection = (): ReactElement => {
           {...visibilityStates}
           variants={headerVariants}
           transition={{ duration: 1.5 }}
+          title="Artist Name"
         >
           Gabriella Joan
         </Styled.ArtistName>

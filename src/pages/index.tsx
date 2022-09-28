@@ -11,7 +11,6 @@ const Home: NextPage = () => {
       <Head>
         <title>Gabriella Joan</title>
         <meta name="description" content="Gabriella Joan's art portfolio" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeSection />
       <AboutSection />

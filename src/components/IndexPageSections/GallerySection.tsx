@@ -1,4 +1,10 @@
-import { ReactElement, useCallback, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  ReactElement,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { ArtPiecesData } from '../../../types/utils/api.type';
 import { useArtPiecesGrid } from '../../hooks/useArtPiecesGrid';
@@ -16,7 +22,7 @@ const Styled = {
     width: var(--vw-no-scrollbar);
     height: fit-content;
     background-color: black;
-    padding: 22vh 15vw;
+    padding: 50vh 15vw;
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -40,6 +46,16 @@ const Styled = {
 };
 
 const PAGE_SIZE = 6;
+
+// styled component throws errors when wrapping IfiniteScroll component
+const infiniteScrollStyles: CSSProperties = {
+  overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+};
 
 export const GallerySection = (): ReactElement => {
   const [galleryPieceUrls, setGalleryPieceUrls] = useState<string[]>([]);
@@ -87,7 +103,7 @@ export const GallerySection = (): ReactElement => {
   return (
     <Styled.GalleryContainer id="gallery">
       <InfiniteScroll
-        scrollThreshold={1}
+        scrollThreshold={0.9}
         dataLength={galleryPieceUrls.length}
         next={fetchMoreArtUrls}
         hasMore={hasMore}
@@ -101,14 +117,7 @@ export const GallerySection = (): ReactElement => {
             />
           </Styled.LoadingMore>
         }
-        style={{
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-        }}
+        style={infiniteScrollStyles}
       >
         <Styled.Header>Gallery</Styled.Header>
         <Styled.GalleryPiecesGrid>
