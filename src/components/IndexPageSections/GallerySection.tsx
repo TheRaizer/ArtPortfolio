@@ -13,19 +13,35 @@ import { Col } from '../common/Col';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Image from 'next/future/image';
+import { Socials } from '../Socials';
 
 const MAX_WIDTH_2_COL = 1800;
 const MAX_WIDTH_1_COL = 1200;
 
 const Styled = {
-  GalleryContainer: styled.div`
+  GalleryContainer: styled.section`
     width: var(--vw-no-scrollbar);
     height: fit-content;
     background-color: black;
-    padding: 50vh 15vw;
+    padding-top: 50vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
     display: flex;
     flex-direction: column;
     gap: 50px;
+  `,
+  Footer: styled.footer`
+    position: relative;
+    display: flex;
+    justify-content: baseline;
+    align-items: flex-end;
+    height: 20vh;
+    width: 100%;
+  `,
+  SocialsContainer: styled.div`
+    position: absolute;
+    right: -14vw;
+    bottom: 2vh;
   `,
   GalleryPiecesGrid: styled.div`
     display: flex;
@@ -126,6 +142,11 @@ export const GallerySection = (): ReactElement => {
           <Col gap="20px">{GalleryPieces[2]}</Col>
         </Styled.GalleryPiecesGrid>
       </InfiniteScroll>
+      <Styled.Footer>
+        <Styled.SocialsContainer>
+          {!hasMore && <Socials />}
+        </Styled.SocialsContainer>
+      </Styled.Footer>
     </Styled.GalleryContainer>
   );
 };
