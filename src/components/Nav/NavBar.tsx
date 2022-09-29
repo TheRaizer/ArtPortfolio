@@ -28,7 +28,7 @@ export const Navbar = (): ReactElement => {
       </NavItem>
       <NavItem href={'#about'}>About</NavItem>
       <NavItem href={'#gallery'}>Gallery</NavItem>
-      <NavItem href={'#'}>Contact</NavItem>
+      <NavItem href={'/contact'}>Contact</NavItem>
     </Styled.NavbarContainer>
   );
 };

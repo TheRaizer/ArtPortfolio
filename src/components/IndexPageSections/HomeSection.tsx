@@ -63,6 +63,7 @@ export const HomeSection = (): ReactElement => {
         src="/images/Home_BG.png"
         layout="fill"
         objectFit="cover"
+        priority={true}
       />
       <Styled.GradientOverlay />
       <Styled.HeaderContainer gap={'10px'}>

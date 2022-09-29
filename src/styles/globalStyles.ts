@@ -103,6 +103,13 @@ const GlobalStyle = createGlobalStyle`
         font: inherit;
         cursor: pointer;
         outline: inherit;
+    } 
+    textarea:focus, input:focus{
+        outline: none;
+    }
+    textarea, input {
+        font-family: inherit;
+        font-size: inherit;
     }
     @font-face {
         font-family: Inter-Regular; 
