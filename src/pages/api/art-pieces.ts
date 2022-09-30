@@ -17,7 +17,7 @@ const artPiecesHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   // wrap in promise and use resolve and reject since the response will be generated in a callback function.
   return new Promise<void>((resolve, reject) => {
     if (!process.env.ART_PIECES_BUCKET || !process.env.CLOUDFRONT_ENDPOINT) {
-      generateRes<ArtPiecesData>(res, StatusCodes.BAD_REQUEST, {
+      generateRes<ArtPiecesData>(res, StatusCodes.INTERNAL_SERVER_ERROR, {
         ok: false,
         detail: 'env is missing variables',
         urls: [],

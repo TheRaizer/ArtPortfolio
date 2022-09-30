@@ -23,7 +23,7 @@ export const fetchAPI = async <T, S = unknown>(
   };
 
   try {
-    const res = await fetch(`/api/${url}`, {
+    const res = await fetch(url, {
       ...options,
       body: JSON.stringify(body),
       method: method,
@@ -36,6 +36,15 @@ export const fetchAPI = async <T, S = unknown>(
     console.error(err);
     throw new Error('request failed: ' + (err as { message: string }).message);
   }
+};
+
+export const fetchNextAPI = async <T, S = unknown>(
+  url: string,
+  method: Method,
+  body?: S,
+  options?: RequestInit
+): Promise<{ data: T; res: Response }> => {
+  return fetchAPI(`/api/${url}`, method, body, options);
 };
 
 export const generateRes = <T>(

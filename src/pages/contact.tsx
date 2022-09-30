@@ -9,10 +9,21 @@ export const Styled = {
   Container: styled.section`
     width: var(--vw-no-scrollbar);
     height: 100vh;
+    position: relative;
+  `,
+  Header: styled.h2`
+    z-index: 1;
+    color: black;
+    position: absolute;
+    font-size: 50px;
+    left: 15%;
+    top: 13%;
   `,
   ContactFormContainer: styled.div`
     z-index: 2;
     position: absolute;
+    left: 15%;
+    top: 25%;
   `,
   SocialsContainer: styled.div`
     z-index: 1;
@@ -42,6 +53,7 @@ const Contact: NextPage = () => {
           objectFit="cover"
           priority={true}
         />
+        <Styled.Header>Inquiries</Styled.Header>
         <Styled.ContactFormContainer>
           <ContactForm />
         </Styled.ContactFormContainer>
