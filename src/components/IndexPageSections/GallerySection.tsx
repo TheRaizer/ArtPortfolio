@@ -8,12 +8,12 @@ import {
 import styled from 'styled-components';
 import { ArtPiecesData } from '../../../types/utils/api.type';
 import { useArtPiecesGrid } from '../../hooks/useArtPiecesGrid';
-import { fetchAPI } from '../../utils/api';
+import { fetchNextAPI } from '../../utils/api';
 import { Col } from '../common/Col';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Image from 'next/future/image';
-import { Socials } from '../Socials';
+import dynamic from 'next/dynamic';
 
 const MAX_WIDTH_2_COL = 1800;
 const MAX_WIDTH_1_COL = 1200;
@@ -73,6 +73,8 @@ const infiniteScrollStyles: CSSProperties = {
   width: '100%',
 };
 
+const Socials = dynamic(() => import('../Socials').then((mod) => mod.Socials));
+
 export const GallerySection = (): ReactElement => {
   const [galleryPieceUrls, setGalleryPieceUrls] = useState<string[]>([]);
   const tokenRef = useRef<string | undefined>();
@@ -91,8 +93,8 @@ export const GallerySection = (): ReactElement => {
 
   useWindowDimensions(changeColumnsOnResize);
 
-  const fetchMoreArtUrls = async () => {
-    const { data } = await fetchAPI<ArtPiecesData>(
+  const fetchMoreArtUrls = useCallback(async () => {
+    const { data } = await fetchNextAPI<ArtPiecesData>(
       `art-pieces?${
         tokenRef.current
           ? `next_continuation_token=${encodeURIComponent(tokenRef.current)}`
@@ -112,7 +114,7 @@ export const GallerySection = (): ReactElement => {
     }
 
     tokenRef.current = data.nextContinuationToken;
-  };
+  }, []);
 
   const { GalleryPieces } = useArtPiecesGrid(galleryPieceUrls, columns);
 

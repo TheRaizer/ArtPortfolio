@@ -1,3 +1,4 @@
+import type { RatelimitResponse } from '@upstash/ratelimit/types/types';
 import { StatusCodes } from 'http-status-codes';
 import { NextApiResponse } from 'next';
 import { Method } from '../../types/utils/api.type';
@@ -23,7 +24,7 @@ export const fetchAPI = async <T, S = unknown>(
   };
 
   try {
-    const res = await fetch(`/api/${url}`, {
+    const res = await fetch(url, {
       ...options,
       body: JSON.stringify(body),
       method: method,
@@ -38,10 +39,27 @@ export const fetchAPI = async <T, S = unknown>(
   }
 };
 
+export const fetchNextAPI = async <T, S = unknown>(
+  url: string,
+  method: Method,
+  body?: S,
+  options?: RequestInit
+): Promise<{ data: T; res: Response }> => {
+  return fetchAPI(`/api/${url}`, method, body, options);
+};
+
 export const generateRes = <T>(
   res: NextApiResponse,
   statusCode: StatusCodes,
   data: T
 ) => {
   return res.status(statusCode).json(data);
+};
+
+export const setRatelimitResHeader = (
+  result: RatelimitResponse,
+  res: NextApiResponse
+) => {
+  res.setHeader('X-RateLimit-Limit', result.limit);
+  res.setHeader('X-RateLimit-Remaining', result.remaining);
 };

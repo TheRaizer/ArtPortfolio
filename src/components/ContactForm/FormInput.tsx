@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { Dispatch, ReactElement, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
 import { DimensionProps } from '../../../types/Dimension.type';
 
@@ -38,6 +38,7 @@ export type FormInputProps = {
   labelSize: string;
   fontSize: string;
   isTextArea?: boolean;
+  setText: Dispatch<SetStateAction<string>>;
 } & DimensionProps;
 
 export const FormInput = ({
@@ -48,9 +49,17 @@ export const FormInput = ({
     <Styled.InputContainer>
       <Styled.InputLabel labelSize={props.labelSize}>{label}</Styled.InputLabel>
       {props.isTextArea ? (
-        <Styled.TextArea label={label} {...props} />
+        <Styled.TextArea
+          label={label}
+          {...props}
+          onChange={(evt) => props.setText(evt.target.value)}
+        />
       ) : (
-        <Styled.InputField label={label} {...props} />
+        <Styled.InputField
+          label={label}
+          {...props}
+          onChange={(evt) => props.setText(evt.target.value)}
+        />
       )}
     </Styled.InputContainer>
   );

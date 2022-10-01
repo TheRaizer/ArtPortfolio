@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { ReactElement } from 'react';
+import { ReactNode, ReactElement } from 'react';
 import styled from 'styled-components';
 import { visibilityStates } from '../../constants/framerMotionStates';
-import { NavItem } from './NavItem';
 
 const Styled = {
   NavbarContainer: styled(motion.nav)`
@@ -14,21 +13,25 @@ const Styled = {
   `,
 };
 
-export const Navbar = (): ReactElement => {
+export const Navbar = ({
+  children,
+  delay,
+  className,
+}: {
+  children: ReactNode;
+  delay?: boolean;
+  className?: string;
+}): ReactElement => {
   return (
     <Styled.NavbarContainer
+      className={className}
       transition={{
         staggerChildren: 0.25,
-        delayChildren: 0.8,
+        delayChildren: delay ? 0.8 : 0,
       }}
       {...visibilityStates}
     >
-      <NavItem href={'#'} initialOpacity={1}>
-        Home
-      </NavItem>
-      <NavItem href={'#about'}>About</NavItem>
-      <NavItem href={'#gallery'}>Gallery</NavItem>
-      <NavItem href={'/contact'}>Contact</NavItem>
+      {children}
     </Styled.NavbarContainer>
   );
 };
