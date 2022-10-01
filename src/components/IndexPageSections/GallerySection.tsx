@@ -93,7 +93,7 @@ export const GallerySection = (): ReactElement => {
 
   useWindowDimensions(changeColumnsOnResize);
 
-  const fetchMoreArtUrls = async () => {
+  const fetchMoreArtUrls = useCallback(async () => {
     const { data } = await fetchNextAPI<ArtPiecesData>(
       `art-pieces?${
         tokenRef.current
@@ -114,7 +114,7 @@ export const GallerySection = (): ReactElement => {
     }
 
     tokenRef.current = data.nextContinuationToken;
-  };
+  }, []);
 
   const { GalleryPieces } = useArtPiecesGrid(galleryPieceUrls, columns);
 

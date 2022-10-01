@@ -6,6 +6,7 @@ import { ViewportStates } from '../../../types/recoil/atoms/appConfig.type';
 import { visibilityStates } from '../../constants/framerMotionStates';
 import { Col } from '../common/Col';
 import { Navbar } from '../Nav/NavBar';
+import { NavItem } from '../Nav/NavItem';
 
 export const Styled = {
   Container: styled.section`
@@ -83,7 +84,14 @@ export const HomeSection = (): ReactElement => {
           Fine Artist | Illustrator | printmaker
         </Styled.ArtistSubtitle>
       </Styled.HeaderContainer>
-      <Navbar />
+      <Navbar delay={true}>
+        <NavItem href={'#'} initialOpacity={1}>
+          Home
+        </NavItem>
+        <NavItem href={'#about'}>About</NavItem>
+        <NavItem href={'#gallery'}>Gallery</NavItem>
+        <NavItem href={'/contact'}>Contact</NavItem>
+      </Navbar>
     </Styled.Container>
   );
 };
