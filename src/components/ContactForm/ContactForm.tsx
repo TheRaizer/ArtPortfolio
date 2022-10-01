@@ -1,4 +1,5 @@
 import { motion, Variants } from 'framer-motion';
+import { StatusCodes } from 'http-status-codes';
 import { ReactElement, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { DimensionProps } from '../../../types/Dimension.type';
@@ -76,9 +77,12 @@ export const ContactForm = (): ReactElement => {
       'POST',
       { sender_name: name, email, message }
     )
-      .then(({ data }) => {
+      .then(({ data, res }) => {
         if (data.ok) setSent(true);
-        console.log(data);
+        else if (res.status === StatusCodes.TOO_MANY_REQUESTS)
+          emitErrorToast(
+            'Please wait a moment before submitting another message'
+          );
       })
       .catch((err) => console.error(err));
   }, [email, message, name]);

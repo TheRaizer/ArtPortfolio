@@ -5,6 +5,9 @@ import { DetailData } from '../../../types/utils/api.type';
 import { ExtendedNextApiRequest } from '../../../types/pages/api/ExtendedNextApiRequest.type';
 import { SendInquiryEmailBody } from '../../../types/pages/api/send-inquiry-email.type';
 import sanitizeHtml from 'sanitize-html';
+import { Ratelimit } from '@upstash/ratelimit';
+import { redis } from '../../utils/redis';
+import { withRatelimit } from '../../utils/middleware/withRatelimit';
 
 /**
  * Formats and sanitizes a message that will be sent to the email of the website owner.
@@ -40,8 +43,7 @@ const formatAndSanitizeMessage = (
   return sanitizedMessage;
 };
 
-// TODO: Rate limit this route harshly
-const artPiecesHandler = async (
+const sendInquiryEmailHandler = async (
   req: ExtendedNextApiRequest<SendInquiryEmailBody>,
   res: NextApiResponse
 ) => {
@@ -101,4 +103,14 @@ const artPiecesHandler = async (
   }
 };
 
-export default artPiecesHandler;
+// Create a new ratelimiter, that allows 1 request per 60 seconds
+const ratelimiter = new Ratelimit({
+  redis: redis,
+  limiter: Ratelimit.fixedWindow(1, '60 s'),
+});
+
+export default withRatelimit<DetailData>(
+  ratelimiter,
+  sendInquiryEmailHandler,
+  {}
+);
