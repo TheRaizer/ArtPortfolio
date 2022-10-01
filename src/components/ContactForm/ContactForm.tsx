@@ -1,7 +1,11 @@
 import { motion, Variants } from 'framer-motion';
-import { ReactElement, useMemo, useState } from 'react';
+import { ReactElement, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { DimensionProps } from '../../../types/Dimension.type';
+import { SendInquiryEmailBody } from '../../../types/pages/api/send-inquiry-email.type';
+import { DetailData } from '../../../types/utils/api.type';
+import { fetchNextAPI } from '../../utils/api';
+import { emitErrorToast } from '../../utils/toast';
 import { Col } from '../common/Col';
 import { FormInput } from './FormInput';
 
@@ -13,11 +17,12 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  SubmitButton: styled(motion.button)<DimensionProps & { sent: boolean }>`
+  SubmitButton: styled(motion.button)<DimensionProps & { $sent: boolean }>`
     width: ${({ width }) => width};
     height: ${({ height }) => height};
     border-radius: 3px;
-    background-color: ${({ sent }) => (sent ? 'gray' : 'black')};
+    background-color: ${({ $sent }) => ($sent ? 'gray' : 'black')};
+    pointer-events: ${({ $sent }) => $sent && 'none'};
 
     transition: width 200ms linear;
   `,
@@ -40,14 +45,48 @@ const submitButtonVariants: Variants = {
   },
 };
 
+/**
+ * The RegExp pattern that emails should follow if they are valid.
+ */
+const pattern = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/);
+
 export const ContactForm = (): ReactElement => {
   const [sent, setSent] = useState(false);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
   const animation = useMemo(() => (sent ? 'initial' : 'sent'), [sent]);
   const buttonText = useMemo(() => (sent ? 'Sent!' : 'Submit'), [sent]);
+
+  const submitAction = useCallback(() => {
+    if (!name || !email || !message) {
+      emitErrorToast('There is a missing field');
+      return;
+    }
+
+    if (!pattern.test(email)) {
+      emitErrorToast('Not a valid email');
+      return;
+    }
+
+    fetchNextAPI<DetailData, SendInquiryEmailBody>(
+      'send-inquiry-email',
+      'POST',
+      { sender_name: name, email, message }
+    )
+      .then(({ data }) => {
+        if (data.ok) setSent(true);
+        console.log(data);
+      })
+      .catch((err) => console.error(err));
+  }, [email, message, name]);
 
   return (
     <Col gap="20px">
       <FormInput
+        setText={setName}
         label="Name (required)"
         width="300px"
         height="33px"
@@ -55,6 +94,7 @@ export const ContactForm = (): ReactElement => {
         labelSize="14px"
       />
       <FormInput
+        setText={setEmail}
         label="Email (required)"
         width="300px"
         height="33px"
@@ -62,7 +102,8 @@ export const ContactForm = (): ReactElement => {
         labelSize="14px"
       />
       <FormInput
-        label="Message"
+        setText={setMessage}
+        label="Message (required)"
         width="600px"
         height="300px"
         fontSize="15px"
@@ -73,11 +114,11 @@ export const ContactForm = (): ReactElement => {
         <Styled.SubmitButton
           initial="initial"
           whileTap={animation}
-          onClick={() => setSent(true)}
+          onClick={submitAction}
           variants={submitButtonVariants}
           width="150px"
           height="50px"
-          sent={sent}
+          $sent={sent}
           disabled={sent}
         >
           {buttonText}

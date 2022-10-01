@@ -8,6 +8,7 @@ import { ViewportStates } from '../../types/recoil/atoms/appConfig.type';
 import memoize from 'lodash/memoize';
 import { ThemeProvider } from 'styled-components';
 import { appConfigState } from '../recoil/atoms/appConfig';
+import { ToastContainer } from 'react-toastify';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -29,6 +30,7 @@ const Page = ({ Component, pageProps }: AppProps): ReactElement => {
 
   return (
     <ThemeProvider theme={{ viewportState }}>
+      <ToastContainer />
       <Component {...pageProps} />
     </ThemeProvider>
   );

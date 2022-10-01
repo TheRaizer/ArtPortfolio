@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { Socials } from '../components/Socials';
 import { ContactForm } from '../components/ContactForm/ContactForm';
+import { Navbar } from '../components/Nav/NavBar';
+import { NavItem } from '../components/Nav/NavItem';
 
 export const Styled = {
   Container: styled.section`
@@ -36,6 +38,9 @@ export const Styled = {
     padding-right: 10px;
     padding-bottom: 10px;
   `,
+  Navbar: styled(Navbar)`
+    z-index: 100;
+  `,
 };
 
 const Contact: NextPage = () => {
@@ -53,6 +58,14 @@ const Contact: NextPage = () => {
           objectFit="cover"
           priority={true}
         />
+        <Styled.Navbar className="nav-bar">
+          <NavItem href={'/#'}>Home</NavItem>
+          <NavItem href={'/#about'}>About</NavItem>
+          <NavItem href={'/#gallery'}>Gallery</NavItem>
+          <NavItem href={'/contact'} initialOpacity={1}>
+            Contact
+          </NavItem>
+        </Styled.Navbar>
         <Styled.Header>Inquiries</Styled.Header>
         <Styled.ContactFormContainer>
           <ContactForm />
