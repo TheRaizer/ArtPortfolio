@@ -2,13 +2,13 @@ export type OKData = {
   ok: boolean;
 };
 
-export type DetailData = {
+export interface DetailData extends OKData {
   detail?: string;
-} & OKData;
+}
 
-export type ArtPiecesData = {
+export interface ArtPiecesData extends DetailData {
   urls: string[];
   nextContinuationToken?: string;
-} & DetailData;
+}
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';

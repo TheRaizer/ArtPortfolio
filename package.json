@@ -11,6 +11,8 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
+    "@upstash/ratelimit": "^0.1.5",
+    "@upstash/redis": "^1.13.1",
     "aws-sdk": "^2.1222.0",
     "framer-motion": "^7.3.6",
     "http-status-codes": "^2.2.0",

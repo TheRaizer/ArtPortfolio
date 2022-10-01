@@ -1,3 +1,4 @@
+import type { RatelimitResponse } from '@upstash/ratelimit/types/types';
 import { StatusCodes } from 'http-status-codes';
 import { NextApiResponse } from 'next';
 import { Method } from '../../types/utils/api.type';
@@ -53,4 +54,12 @@ export const generateRes = <T>(
   data: T
 ) => {
   return res.status(statusCode).json(data);
+};
+
+export const setRatelimitResHeader = (
+  result: RatelimitResponse,
+  res: NextApiResponse
+) => {
+  res.setHeader('X-RateLimit-Limit', result.limit);
+  res.setHeader('X-RateLimit-Remaining', result.remaining);
 };
