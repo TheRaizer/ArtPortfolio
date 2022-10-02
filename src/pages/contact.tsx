@@ -1,11 +1,18 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Image from 'next/image';
 import { Socials } from '../components/Socials';
 import { ContactForm } from '../components/ContactForm/ContactForm';
 import { Navbar } from '../components/Nav/NavBar';
 import { NavItem } from '../components/Nav/NavItem';
+import { ViewportStates } from '../../types/recoil/atoms/appConfig.type';
+import { centeredHorizontally } from '../styles/generalStyles';
+
+const desktopHorizontalPosition = css`
+  position: absolute;
+  left: 15%;
+`;
 
 export const Styled = {
   Container: styled.section`
@@ -16,15 +23,19 @@ export const Styled = {
   Header: styled.h2`
     z-index: 1;
     color: black;
-    position: absolute;
     font-size: 50px;
-    left: 15%;
+    ${({ theme }) =>
+      theme.viewportState !== ViewportStates.DESKTOP
+        ? centeredHorizontally
+        : desktopHorizontalPosition}
     top: 13%;
   `,
   ContactFormContainer: styled.div`
     z-index: 2;
-    position: absolute;
-    left: 15%;
+    ${({ theme }) =>
+      theme.viewportState !== ViewportStates.DESKTOP
+        ? centeredHorizontally
+        : desktopHorizontalPosition}
     top: 25%;
   `,
   SocialsContainer: styled.div`

@@ -1,10 +1,13 @@
 import { motion, Variants } from 'framer-motion';
 import { StatusCodes } from 'http-status-codes';
 import { ReactElement, useCallback, useMemo, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { DimensionProps } from '../../../types/Dimension.type';
 import { SendInquiryEmailBody } from '../../../types/pages/api/send-inquiry-email.type';
+import { ViewportStates } from '../../../types/recoil/atoms/appConfig.type';
 import { DetailData } from '../../../types/utils/api.type';
+import { appConfigState } from '../../recoil/atoms/appConfig';
 import { fetchNextAPI } from '../../utils/api';
 import { emitErrorToast } from '../../utils/toast';
 import { Col } from '../common/Col';
@@ -52,6 +55,7 @@ const submitButtonVariants: Variants = {
 const pattern = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/);
 
 export const ContactForm = (): ReactElement => {
+  const { viewportState } = useRecoilValue(appConfigState);
   const [sent, setSent] = useState(false);
 
   const [name, setName] = useState('');
@@ -108,8 +112,8 @@ export const ContactForm = (): ReactElement => {
       <FormInput
         setText={setMessage}
         label="Message (required)"
-        width="600px"
-        height="300px"
+        width={viewportState !== ViewportStates.DESKTOP ? '300px' : '600px'}
+        height="30vh"
         fontSize="15px"
         labelSize="14px"
         isTextArea={true}
