@@ -2,7 +2,7 @@ import AWS from 'aws-sdk';
 import path from 'path';
 import fs from 'fs';
 
-if (!process.env.AWS_ACCESS_KEY || !process.env.AWS_SECRET_KEY) {
+if (!process.env.AWS_SDK_ACCESS_KEY || !process.env.AWS_SDK_SECRET_KEY) {
   throw new Error('aws access key or secret is missing');
 }
 
@@ -11,8 +11,8 @@ if (!process.env.CLOUDFRONT_KEY_PAIR_ID) {
 }
 
 AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: process.env.AWS_SDK_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SDK_SECRET_KEY,
   region: process.env.REGION,
   signatureVersion: 'v4',
 });
