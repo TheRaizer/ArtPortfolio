@@ -96,7 +96,7 @@ const sendInquiryEmailHandler = async (
     });
   else {
     console.log(data);
-    return generateRes<DetailData>(res, StatusCodes.OK, {
+    return generateRes<DetailData>(res, StatusCodes.INTERNAL_SERVER_ERROR, {
       ok: false,
       detail: 'Email failed to send',
     });
