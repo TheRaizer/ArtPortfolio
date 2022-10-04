@@ -29,8 +29,8 @@ export const Navbar = ({
           >
             Home
           </MobileNavItem>
-          <MobileNavItem href={'#about'}>About</MobileNavItem>
-          <MobileNavItem href={'#gallery'}>Gallery</MobileNavItem>
+          <MobileNavItem href={'/#about'}>About</MobileNavItem>
+          <MobileNavItem href={'/#gallery'}>Gallery</MobileNavItem>
           <MobileNavItem
             href={Pages.CONTACT}
             initialOpacity={page === Pages.CONTACT ? 1 : undefined}
@@ -46,8 +46,8 @@ export const Navbar = ({
           >
             Home
           </DesktopNavItem>
-          <DesktopNavItem href={'#about'}>About</DesktopNavItem>
-          <DesktopNavItem href={'#gallery'}>Gallery</DesktopNavItem>
+          <DesktopNavItem href={'/#about'}>About</DesktopNavItem>
+          <DesktopNavItem href={'/#gallery'}>Gallery</DesktopNavItem>
           <DesktopNavItem
             href={Pages.CONTACT}
             initialOpacity={page === Pages.CONTACT ? 1 : undefined}
