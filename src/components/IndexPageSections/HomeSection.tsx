@@ -18,6 +18,7 @@ export const Styled = {
   Container: styled.section`
     width: var(--vw-no-scrollbar);
     height: 100vh;
+    background-color: black;
   `,
   HeaderContainer: styled(Col)`
     text-align: center;
