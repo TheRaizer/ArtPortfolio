@@ -76,14 +76,14 @@ export const TimelineOverlay = (): ReactElement | null => {
               expandVertically={true}
               height="150vh"
               transitionDuration={1}
-              top="70vh"
+              top="68vh"
               left="5%"
             />
             <Circle
               order={6}
               expandVertically={true}
               transitionDuration={0.3}
-              top="219vh"
+              top="217vh"
               left="5%"
               marginleft="-11px"
             />

@@ -4,10 +4,10 @@ import styled, { css } from 'styled-components';
 import Image from 'next/image';
 import { Socials } from '../components/Socials';
 import { ContactForm } from '../components/ContactForm/ContactForm';
-import { Navbar } from '../components/Nav/NavBar';
-import { NavItem } from '../components/Nav/NavItem';
 import { ViewportStates } from '../../types/recoil/atoms/appConfig.type';
 import { centeredHorizontally } from '../styles/generalStyles';
+import { Navbar } from '../components/Nav/Navbar';
+import { Pages } from '../constants/pages';
 
 const desktopHorizontalPosition = css`
   position: absolute;
@@ -69,14 +69,7 @@ const Contact: NextPage = () => {
           objectFit="cover"
           priority={true}
         />
-        <Styled.Navbar className="nav-bar">
-          <NavItem href={'/#'}>Home</NavItem>
-          <NavItem href={'/#about'}>About</NavItem>
-          <NavItem href={'/#gallery'}>Gallery</NavItem>
-          <NavItem href={'/contact'} initialOpacity={1}>
-            Contact
-          </NavItem>
-        </Styled.Navbar>
+        <Styled.Navbar page={Pages.CONTACT} className="nav-bar" />
         <Styled.Header>Inquiries</Styled.Header>
         <Styled.ContactFormContainer>
           <ContactForm />

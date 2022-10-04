@@ -1,21 +1,12 @@
 import { screen, waitFor } from '@testing-library/react';
 import React from 'react';
-import { Navbar } from '../../../components/Nav/NavBar';
-import { NavItem } from '../../../components/Nav/NavItem';
+import { Navbar } from '../../../components/Nav/Navbar';
+import { Pages } from '../../../constants/pages';
 import { render } from '../../utils/custom-renderer';
 
-describe('NavBar', () => {
+describe('Navbar', () => {
   it('should contain the correct sections text', () => {
-    render(
-      <Navbar delay={true}>
-        <NavItem href={'#'} initialOpacity={1}>
-          Home
-        </NavItem>
-        <NavItem href={'#about'}>About</NavItem>
-        <NavItem href={'#gallery'}>Gallery</NavItem>
-        <NavItem href={'/contact'}>Contact</NavItem>
-      </Navbar>
-    );
+    render(<Navbar page={Pages.HOME} />);
 
     expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
@@ -25,16 +16,7 @@ describe('NavBar', () => {
 
   describe('Visibility', () => {
     it('should not be visible initially', () => {
-      render(
-        <Navbar delay={true}>
-          <NavItem href={'#'} initialOpacity={1}>
-            Home
-          </NavItem>
-          <NavItem href={'#about'}>About</NavItem>
-          <NavItem href={'#gallery'}>Gallery</NavItem>
-          <NavItem href={'/contact'}>Contact</NavItem>
-        </Navbar>
-      );
+      render(<Navbar page={Pages.HOME} />);
 
       expect(screen.getByRole('link', { name: /home/i })).not.toBeVisible();
       expect(screen.getByRole('link', { name: /about/i })).not.toBeVisible();
@@ -43,16 +25,7 @@ describe('NavBar', () => {
     });
 
     it('should become visible', async () => {
-      render(
-        <Navbar delay={true}>
-          <NavItem href={'#'} initialOpacity={1}>
-            Home
-          </NavItem>
-          <NavItem href={'#about'}>About</NavItem>
-          <NavItem href={'#gallery'}>Gallery</NavItem>
-          <NavItem href={'/contact'}>Contact</NavItem>
-        </Navbar>
-      );
+      render(<Navbar page={Pages.HOME} />);
 
       await waitFor(() =>
         expect(screen.getByRole('link', { name: /home/i })).toBeVisible()

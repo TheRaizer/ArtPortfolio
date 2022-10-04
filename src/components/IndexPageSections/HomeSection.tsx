@@ -1,12 +1,18 @@
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import { ReactElement } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ViewportStates } from '../../../types/recoil/atoms/appConfig.type';
 import { visibilityStates } from '../../constants/framerMotionStates';
+import { Pages } from '../../constants/pages';
+import { centeredHorizontally } from '../../styles/generalStyles';
 import { Col } from '../common/Col';
-import { Navbar } from '../Nav/NavBar';
-import { NavItem } from '../Nav/NavItem';
+import { Navbar } from '../Nav/Navbar';
+
+const horizontalPositioning = css`
+  left: 15%;
+  position: absolute;
+`;
 
 export const Styled = {
   Container: styled.section`
@@ -18,10 +24,11 @@ export const Styled = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
     top: 37%;
-    left: ${({ theme }) =>
-      theme.viewportState === ViewportStates.MOBILE ? '5%' : '15%'};
+    ${({ theme }) =>
+      theme.viewportState === ViewportStates.MOBILE
+        ? centeredHorizontally
+        : horizontalPositioning};
   `,
   ArtistName: styled(motion.h1)`
     font-size: ${({ theme }) =>
@@ -84,14 +91,7 @@ export const HomeSection = (): ReactElement => {
           Fine Artist | Illustrator | printmaker
         </Styled.ArtistSubtitle>
       </Styled.HeaderContainer>
-      <Navbar delay={true}>
-        <NavItem href={'#'} initialOpacity={1}>
-          Home
-        </NavItem>
-        <NavItem href={'#about'}>About</NavItem>
-        <NavItem href={'#gallery'}>Gallery</NavItem>
-        <NavItem href={'/contact'}>Contact</NavItem>
-      </Navbar>
+      <Navbar page={Pages.HOME} />
     </Styled.Container>
   );
 };

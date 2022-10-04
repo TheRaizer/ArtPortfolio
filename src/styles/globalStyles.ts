@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { noScroll } from '../constants/classNames';
 import { colors } from './globalColors';
 
 const GlobalStyle = createGlobalStyle`
@@ -40,6 +41,11 @@ const GlobalStyle = createGlobalStyle`
         line-height: normal;
         background-color: rgb(39, 45, 45);
         color: white;
+    }
+    body.${noScroll} {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
     }
     ol, ul {
         list-style: none;
