@@ -103,10 +103,10 @@ const sendInquiryEmailHandler = async (
   }
 };
 
-// Create a new ratelimiter, that allows 1 request per 60 seconds
+// Create a new ratelimiter, that allows 3 request per 60 seconds
 const ratelimiter = new Ratelimit({
   redis: redis,
-  limiter: Ratelimit.fixedWindow(1, '60 s'),
+  limiter: Ratelimit.fixedWindow(3, '60 s'),
 });
 
 export default withRatelimit<DetailData>(
