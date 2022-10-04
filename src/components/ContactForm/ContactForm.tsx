@@ -83,11 +83,11 @@ export const ContactForm = (): ReactElement => {
     )
       .then(({ data, res }) => {
         if (data.ok) setSent(true);
-        else if (data.detail) emitErrorToast(data.detail);
         else if (res.status === StatusCodes.TOO_MANY_REQUESTS)
           emitErrorToast(
             'Please wait a moment before submitting another message'
           );
+        else if (data.detail) emitErrorToast(data.detail);
       })
       .catch((err) => console.error(err));
   }, [email, message, name]);
