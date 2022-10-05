@@ -12,6 +12,8 @@ export const generateCSP = () => {
 
   add('default-src', `'none'`);
 
+  add('prefetch-src', `'self'`);
+
   add('img-src', `'self'`);
 
   add('font-src', `'self'`);
@@ -20,7 +22,7 @@ export const generateCSP = () => {
 
   add('script-src', `'unsafe-eval'`, { devOnly: true });
 
-  add('connect-src', `'self'`, { devOnly: true });
+  add('connect-src', `'self'`);
 
   add('style-src', `'unsafe-inline'`);
 
