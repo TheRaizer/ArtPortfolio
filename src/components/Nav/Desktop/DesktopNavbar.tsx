@@ -25,7 +25,7 @@ export const DesktopNavbar = ({
         className={className}
         transition={{
           staggerChildren: 0.25,
-          delayChildren: delay ? 0.8 : 0,
+          delayChildren: delay ? 0.6 : 0,
         }}
         {...visibilityStates}
       >

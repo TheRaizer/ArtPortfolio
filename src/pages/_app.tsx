@@ -9,6 +9,7 @@ import memoize from 'lodash/memoize';
 import { ThemeProvider } from 'styled-components';
 import { appConfigState } from '../recoil/atoms/appConfig';
 import { ToastContainer } from 'react-toastify';
+import { generateCSP } from '../utils/generateCSP';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -51,6 +52,7 @@ function ArtPortfolioApp(props: AppProps) {
         <meta name="page-type" content="Art" />
         <meta name="audience" content="Everyone" />
         <meta name="robots" content="index, follow" />
+        <meta httpEquiv="Content-Security-Policy" content={generateCSP()} />
       </Head>
       <GlobalStyle />
       <RecoilRoot>

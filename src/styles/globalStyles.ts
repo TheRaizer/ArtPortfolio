@@ -120,6 +120,7 @@ const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: Inter-Regular; 
         src: url('/fonts/Inter-Regular.ttf'); 
+        font-display: swap;
     }
 `;
 

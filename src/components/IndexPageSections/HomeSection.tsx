@@ -16,6 +16,7 @@ const horizontalPositioning = css`
 
 export const Styled = {
   Container: styled.section`
+    position: relative;
     width: var(--vw-no-scrollbar);
     height: 100vh;
     background-color: black;
@@ -35,7 +36,7 @@ export const Styled = {
     font-size: ${({ theme }) =>
       theme.viewportState === ViewportStates.MOBILE ? '50px' : '80px'};
   `,
-  ArtistSubtitle: styled(motion.h4)`
+  ArtistSubtitle: styled(motion.h2)`
     font-size: ${({ theme }) =>
       theme.viewportState === ViewportStates.MOBILE ? '15px' : '20px'};
     font-style: italic;

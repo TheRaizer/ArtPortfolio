@@ -40,14 +40,8 @@ class MyDocument extends Document {
 
   render(): React.ReactElement {
     return (
-      <Html>
-        <Head>
-          <link
-            href="https://fonts.googleapis.com/css?family=Lato:400,700&display=optional"
-            rel="stylesheet"
-            type="text/css"
-          ></link>
-        </Head>
+      <Html lang="en">
+        <Head />
         <body>
           <Main />
           <NextScript />
