@@ -23,7 +23,7 @@ const Styled = {
 };
 
 /**
- * The entire timeline that will overlay on top of the page components.
+ * The entire timeline that will overlay on top of the home page sections.
  */
 export const TimelineOverlay = (): ReactElement | null => {
   const { viewportState } = useRecoilValue(appConfigState);

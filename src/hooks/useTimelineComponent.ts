@@ -12,7 +12,10 @@ import { visibilityStates } from '../constants/framerMotionStates';
  * @see ref: a ref that should be passed to the timeline component that will be controlled.
  * @see control: a control that manages the animation of the timeline component.
  * (Should be passed to the timeline component in the 'animate' prop)
- * @see onAnimationCompleted: a function that should be passed to the timeline components 'onAnimationCompleted' prop.
+ * @see onAnimationCompleted: a function that registers this timeline component's animation as completed in
+ * the global recoil state. It should be passed to the timeline components 'onAnimationCompleted' prop.
+ * @see onAnimationStarted: a function that registers this timeline component's animation state as started.
+ * It should be passed to the timeline component's 'onAnimationStarted' prop.
  */
 export const useTimelineComponent = (order: number) => {
   const timeline = useRecoilValue(timelineState);
@@ -22,6 +25,8 @@ export const useTimelineComponent = (order: number) => {
   /**
    * We can only animate if the previous component in the timeline has finished animating
    * or if this component is the first component in the timeline.
+   *
+   * Also, the animation must not be already started.
    */
   const canAnimate = useMemo(
     () =>
