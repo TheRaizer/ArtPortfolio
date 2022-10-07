@@ -1,7 +1,7 @@
 import { waitFor, screen } from '@testing-library/react';
 import React from 'react';
 import { AboutSection } from '../../../components/IndexPageSections/AboutSection';
-import { render } from '../../utils/custom-renderer';
+import { render } from '../../test-utils/custom-renderer';
 
 /**
  * the useInView hook will always return true so components that use the hook to start

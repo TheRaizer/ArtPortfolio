@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { DesktopNavItem } from '../../../../components/Nav/Desktop/DesktopNavItem';
-import { render } from '../../../utils/custom-renderer';
+import { render } from '../../../test-utils/custom-renderer';
 
 describe('NavItem', () => {
   it('should render with the correct text', () => {

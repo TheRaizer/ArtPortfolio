@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Navbar } from '../../../components/Nav/Navbar';
 import { Pages } from '../../../constants/pages';
-import { render } from '../../utils/custom-renderer';
+import { render } from '../../test-utils/custom-renderer';
 
 describe('Navbar', () => {
   it('should contain the correct sections text', () => {

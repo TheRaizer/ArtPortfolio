@@ -1,5 +1,5 @@
-import { MarginProps } from '../Margins.type';
-import { PositionProps } from '../Position.type';
+import { MarginProps } from '../../Margins.type';
+import { PositionProps } from '../../Position.type';
 
 export type TimeLineProps = {
   /**

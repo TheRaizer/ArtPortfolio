@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { GalleryPiece } from '../../components/GalleryPiece';
-import { render } from '../utils/custom-renderer';
+import { render } from '../test-utils/custom-renderer';
 import 'jest-styled-components';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-return

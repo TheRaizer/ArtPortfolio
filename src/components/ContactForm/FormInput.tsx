@@ -1,6 +1,6 @@
-import { Dispatch, ReactElement, SetStateAction } from 'react';
+import { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-import { DimensionProps } from '../../../types/Dimension.type';
+import { FormInputProps } from '../../../types/components/ContactForm/FormInput.type';
 
 const inputFieldCSS = css<FormInputProps>`
   border: 1px solid var(--gray-2);
@@ -32,14 +32,6 @@ const Styled = {
     ${inputFieldCSS}
   `,
 };
-
-export type FormInputProps = {
-  label: string;
-  labelSize: string;
-  fontSize: string;
-  isTextArea?: boolean;
-  setText: Dispatch<SetStateAction<string>>;
-} & DimensionProps;
 
 export const FormInput = ({
   label,

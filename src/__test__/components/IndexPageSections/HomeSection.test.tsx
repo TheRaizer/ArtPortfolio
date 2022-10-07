@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { HomeSection } from '../../../components/IndexPageSections/HomeSection';
-import { render } from '../../utils/custom-renderer';
+import { render } from '../../test-utils/custom-renderer';
 
 describe('HomeSection', () => {
   it('should render properly', async () => {

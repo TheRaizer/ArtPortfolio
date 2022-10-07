@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
-import { render } from '../../utils/custom-renderer';
+import { render } from '../../test-utils/custom-renderer';
 import { PositionProps } from '../../../../types/Position.type';
 import { Line } from '../../../components/Timeline/Line';
 import { DimensionProps } from '../../../../types/Dimension.type';

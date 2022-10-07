@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { NavItemProps } from '../../../../types/Nav/NavItem.type';
+import { NavItemProps } from '../../../../types/components/Nav/NavItem.type';
 import { visibilityStates } from '../../../constants/framerMotionStates';
 import { mobileNavIsOpenSelector } from '../../../recoil/selectors/mobileNavSelector';
 import { navItemAnimations } from '../navItemAnimation';

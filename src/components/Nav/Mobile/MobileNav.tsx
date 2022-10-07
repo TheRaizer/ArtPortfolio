@@ -6,7 +6,7 @@ import { visibilityStates } from '../../../constants/framerMotionStates';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { mobileNavIsOpenSelector } from '../../../recoil/selectors/mobileNavSelector';
-import { NavbarProps } from '../../../../types/Nav/Navbar.type';
+import { NavbarProps } from '../../../../types/components/Nav/Navbar.type';
 
 const Styled = {
   MobileNavContainer: styled(motion.nav)`

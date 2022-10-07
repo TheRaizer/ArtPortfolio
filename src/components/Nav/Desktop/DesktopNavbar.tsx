@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ReactElement } from 'react';
 import styled from 'styled-components';
-import { NavbarProps } from '../../../../types/Nav/Navbar.type';
+import { NavbarProps } from '../../../../types/components/Nav/Navbar.type';
 import { visibilityStates } from '../../../constants/framerMotionStates';
 
 const Styled = {

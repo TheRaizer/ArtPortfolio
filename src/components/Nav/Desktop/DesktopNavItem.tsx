@@ -2,7 +2,7 @@ import { ReactElement, useMemo } from 'react';
 import { motion, Variants } from 'framer-motion';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { NavItemProps } from '../../../../types/Nav/NavItem.type';
+import { NavItemProps } from '../../../../types/components/Nav/NavItem.type';
 import { visibilityStates } from '../../../constants/framerMotionStates';
 import { navItemAnimations } from '../navItemAnimation';
 

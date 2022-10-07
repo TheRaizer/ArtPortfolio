@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { DimensionProps } from '../../../types/Dimension.type';
 import { MarginProps } from '../../../types/Margins.type';
 import { PositionProps } from '../../../types/Position.type';
-import { TimeLineProps } from '../../../types/TimeLine/TimeLine.type';
+import { TimeLineProps } from '../../../types/components/TimeLine/TimeLine.type';
 import { visibilityStates } from '../../constants/framerMotionStates';
 import { useTimelineComponent } from '../../hooks/useTimelineComponent';
 
