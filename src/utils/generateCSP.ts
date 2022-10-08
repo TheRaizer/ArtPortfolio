@@ -24,7 +24,7 @@ export const generateCSP = () => {
 
   add('connect-src', `'self'`);
 
-  add('style-src', `'unsafe-inline'`);
+  add('style-src', `'self' 'unsafe-inline'`);
 
   // return the object in a formatted value
   return Object.entries(policy)

@@ -13,6 +13,12 @@ import { emitErrorToast } from '../../utils/toast';
 import { Col } from '../common/Col';
 import { FormInput } from './FormInput';
 
+enum EmailState {
+  INITIAL = 'initial',
+  SENDING = 'sending',
+  SENT = 'sent',
+}
+
 const Styled = {
   ButtonContainer: styled.div`
     width: 150px;
@@ -21,12 +27,13 @@ const Styled = {
     justify-content: center;
     align-items: center;
   `,
-  SubmitButton: styled(motion.button)<DimensionProps & { $sent: boolean }>`
+  SubmitButton: styled(motion.button)<DimensionProps & { $state: EmailState }>`
     width: ${({ width }) => width};
     height: ${({ height }) => height};
     border-radius: 3px;
-    background-color: ${({ $sent }) => ($sent ? 'gray' : 'black')};
-    pointer-events: ${({ $sent }) => $sent && 'none'};
+    background-color: ${({ $state }) =>
+      $state !== EmailState.INITIAL ? 'gray' : 'black'};
+    pointer-events: ${({ $state }) => $state !== EmailState.INITIAL && 'none'};
 
     transition: width 200ms linear;
   `,
@@ -40,7 +47,7 @@ const submitButtonVariants: Variants = {
       type: 'spring',
     },
   },
-  sent: {
+  tap: {
     scale: 0.9,
     transition: {
       duration: 0.2,
@@ -56,14 +63,26 @@ const pattern = new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/);
 
 export const ContactForm = (): ReactElement => {
   const { viewportState } = useRecoilValue(appConfigState);
-  const [sent, setSent] = useState(false);
+  const [emailState, setEmailState] = useState(EmailState.INITIAL);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const animation = useMemo(() => (sent ? 'initial' : 'sent'), [sent]);
-  const buttonText = useMemo(() => (sent ? 'Sent!' : 'Submit'), [sent]);
+  const animation = useMemo(
+    () => (emailState !== EmailState.INITIAL ? 'initial' : 'tap'),
+    [emailState]
+  );
+  const buttonText = useMemo(() => {
+    switch (emailState) {
+      case EmailState.INITIAL:
+        return 'Submit';
+      case EmailState.SENDING:
+        return 'Sending...';
+      case EmailState.SENT:
+        return 'Sent!';
+    }
+  }, [emailState]);
 
   const submitAction = useCallback(() => {
     if (!name || !email || !message) {
@@ -76,18 +95,25 @@ export const ContactForm = (): ReactElement => {
       return;
     }
 
+    // should change from submit to sending state
+    setEmailState(EmailState.SENDING);
+
     fetchNextAPI<DetailData, SendInquiryEmailBody>(
       'send-inquiry-email',
       'POST',
       { sender_name: name, email, message }
     )
       .then(({ data, res }) => {
-        if (data.ok) setSent(true);
+        // if successful change from sending state to sent state
+        if (data.ok) setEmailState(EmailState.SENT);
         else if (res.status === StatusCodes.TOO_MANY_REQUESTS)
           emitErrorToast(
             'Please wait a moment before submitting another message'
           );
         else if (data.detail) emitErrorToast(data.detail);
+
+        // if message sending failed, reset email state
+        if (!data.ok) setEmailState(EmailState.INITIAL);
       })
       .catch((err) => console.error(err));
   }, [email, message, name]);
@@ -127,8 +153,7 @@ export const ContactForm = (): ReactElement => {
           variants={submitButtonVariants}
           width="150px"
           height="50px"
-          $sent={sent}
-          disabled={sent}
+          $state={emailState}
         >
           {buttonText}
         </Styled.SubmitButton>
