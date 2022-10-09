@@ -9,7 +9,7 @@ describe('generateCSP', () => {
     const csp = generateCSP();
 
     expect(csp).toStrictEqual(
-      `default-src 'none'; prefetch-src 'self'; img-src 'self'; font-src 'self'; script-src-elem 'self'; connect-src 'self'; style-src 'unsafe-inline'`
+      `default-src 'none'; prefetch-src 'self'; img-src 'self'; font-src 'self'; script-src-elem 'self'; connect-src 'self'; style-src 'self' 'unsafe-inline'`
     );
   });
 
@@ -22,7 +22,7 @@ describe('generateCSP', () => {
     const csp = generateCSP();
 
     expect(csp).toStrictEqual(
-      `default-src 'none'; prefetch-src 'self'; img-src 'self'; font-src 'self'; script-src-elem 'self'; connect-src 'self'; style-src 'unsafe-inline'`
+      `default-src 'none'; prefetch-src 'self'; img-src 'self'; font-src 'self'; script-src-elem 'self'; connect-src 'self'; style-src 'self' 'unsafe-inline'`
     );
   });
 });

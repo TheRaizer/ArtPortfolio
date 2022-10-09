@@ -59,7 +59,7 @@ const Contact: NextPage = () => {
     <>
       <Head>
         <title>Gabriella Joan</title>
-        <meta name="description" content="Gabriella Joan's art portfolio" />
+        <meta name="description" content="Contact Gabriella Joan" />
       </Head>
       <Styled.Container>
         <Image
