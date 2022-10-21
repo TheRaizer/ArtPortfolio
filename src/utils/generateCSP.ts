@@ -22,7 +22,7 @@ export const generateCSP = () => {
 
   add('script-src', `'unsafe-eval'`, { devOnly: true });
 
-  add('connect-src', `'self'`);
+  add('connect-src', `'self' vitals.vercel-insights.com`);
 
   add('style-src', `'self' 'unsafe-inline'`);
 
